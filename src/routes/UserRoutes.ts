@@ -1,8 +1,11 @@
 import express from 'express';
-import { userCreate } from '../controller/userController'; // Make sure this path is correct
+import { userCreate, userDelete, userGet, userUpdate } from '../controller/userController'; // Make sure this path is correct
 
 const router = express.Router();
 
-router.post('/user', userCreate);
+router.post('/createUser', userCreate);
+router.get("/getUser", userGet)
+router.put("/updateUser/:id", userUpdate);
+router.delete("/deleteUser/:id", userDelete)
 
 export default router;
