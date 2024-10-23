@@ -1,0 +1,173 @@
+{
+    "openai": "3.0.2",
+    "info": {
+        "title": "Crud Service",
+        "description": "This Api is a crud Service",
+        "version": "0.0.1"
+    },
+    "security": [
+        {
+            "BearerAuth": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "http://localhost:4000",
+            "description": "local"
+        },
+        {
+            "url": "http://localhost:3010",
+            "description": "test"
+        }
+    ],
+    "paths": {
+        "/api/user": {
+            "post": {
+                "summary": "create an user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUser"
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "200": {
+                        "$ref": "#/components/responses/AddUserResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "5xx": {
+                        "$ref": "#/components/responses/5XX"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "parameters": {},
+        "schemas": {
+            "Endpoint": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "format": "1"
+                    },
+                    "username": {
+                        "type": "string",
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date"
+                    }
+                }
+            },
+            "ListEndpointResponse": {},
+            "Model": {},
+            "CreateUser": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "The user ID of the Createuser.",
+                        "example": "456e7890-f12d-34b6-a789-234567890123"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "username of the new Usercreate.",
+                        "example": "Dharti"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "email of the new UserCreate.",
+                        "example": "dharti@gmail.com"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "description": "Date of the new UserCreate.",
+                        "example": "2024-10-22T12:21:09.618Z"
+                    }
+                }
+            },
+            "UpdateEndpointPayload": {},
+            "FieldSearchOptions": {}
+        },
+        "responses": {
+            "Endpoint": {},
+            "AddUserResponse": {
+                "description": "User Request successful - returns, updated endpoint",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Endpoint"
+                        },
+                        "example": {
+                            "success": {
+                                "summary": "Exapmle of userCreate",
+                                "value": {
+                                    "id": 3,
+                                    "username": "test",
+                                    "email": "testing@gmail.com",
+                                    "createdAt": "2024-10-23T08:56:10.709Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "updateUserResponse": {},
+            "Model": {},
+            "Endpoints": {},
+            "ExternalIdFormatDefination": {},
+            "Models": {},
+            "400": {
+                "description": "Bad request"
+            },
+            "401": {
+                "description": "Authorization information is missing or invalid"
+            },
+            "409": {
+                "description": "Conflict - Endpoint with externalId already exists"
+            },
+            "404": {
+                "description": "Not found"
+            },
+            "5XX": {
+                "description": "Server error"
+            },
+            "exaples": {
+                "EndpointExample": {
+                    "summary": "Example of an userCreate",
+                    "value": {
+                        "id": 3,
+                        "username": "test",
+                        "email": "testing@gmail.com",
+                        "createdAt": "2024-10-23T08:56:10.709Z"
+                    }
+                }
+            }
+        }
+    }
+}
