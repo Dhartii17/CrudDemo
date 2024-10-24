@@ -25,14 +25,15 @@ export const getUser = async () => {
 const getUserById = async (id: string) => {
     const userId = parseInt(id);
 
-    console.log("userId in model", typeof userId);
-    console.log("user", userId);
 
-    const user = await prisma.user.findUniqueOrThrow({
+    const user = await prisma.user.findFirst({
         where: {
             id: userId,
         },
     });
+
+
+
 
     return user;
 };
@@ -46,7 +47,7 @@ export const updateUser = async (
     const user = await getUserById(id);
 
     if (!user) {
-        return user
+        return user;
     }
     const userData = await prisma.user.update({
         where: {
@@ -63,18 +64,18 @@ export const updateUser = async (
 
 export const deleteUser = async (id: string) => {
     const user = await getUserById(id);
-    if (!user) {
-        console.log("COME IN CONDITION");
 
-        return user
+    console.log("delete user", user);
+
+    if (!user) {
+        return user;
     }
 
     const userDelete = await prisma.user.delete({
         where: {
-            id: parseInt(id)
-        }
-    })
+            id: parseInt(id),
+        },
+    });
 
-    return userDelete
-
-}
+    return userDelete;
+};

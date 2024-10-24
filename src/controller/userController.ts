@@ -41,6 +41,9 @@ const userUpdate = async (req: Request, res: Response) => {
         const { username, email } = req.body;
 
         const user = await updateUser(id, username, email);
+        if (!user) {
+            return res.status(400).json({ message: "User not found!" })
+        }
         return res.status(201).json({ message: "user updated successfully", user })
     } catch (error) {
         return res
@@ -69,5 +72,6 @@ const userDelete = async (req: Request, res: Response) => {
 
     }
 }
+
 
 export { userCreate, userGet, userUpdate, userDelete };
